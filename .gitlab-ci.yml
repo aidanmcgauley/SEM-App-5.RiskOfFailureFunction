@@ -1,0 +1,16 @@
+image: ruby:latest
+
+stages:
+ - test
+ 
+variables:
+  BUNDLE_PATH: 'vendor/bundle'
+
+before_script:
+  - gem install bundler
+  - bundle install
+
+test:
+  stage: test
+  script:
+    - ruby -Isrc:test test/test_functions.rb
