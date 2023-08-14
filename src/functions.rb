@@ -2,13 +2,13 @@ def validate_parameters(engagement_score_param, cut_off_score_param)
 
     # Check if engagement score is an int
     # ChatGPT generated this regular expression which works for my purposes. Matches digits 0-9.
-    if engagement_score_param !~ /^\d+$/
+    if engagement_score_param !~ /^-?\d+$/
         return { error: "Invalid parameter. The calculated engagement score for your attendance was not an integer.", status: 400 }
     end
 
     # Check if cut-off score is an int
     # Same regex as above
-    if cut_off_score_param !~ /^\d+$/
+    if cut_off_score_param !~ /^-?\d+$/
         return { :error => "Invalid input. Cut-off Engagement Score must be an integer.", status: 400 }
     end
 
