@@ -2,12 +2,13 @@ image: ruby:latest
 
 stages:
  - test
- 
+
 variables:
   BUNDLE_PATH: 'vendor/bundle'
 
 before_script:
   - gem install bundler
+  - gem install sinatra
   - bundle install
 
 test:
