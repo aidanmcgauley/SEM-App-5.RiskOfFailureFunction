@@ -1,5 +1,5 @@
 require 'minitest/autorun'
-require_relative 'functions'
+require_relative '../src/functions'
 
 class TestValidateParameters < Minitest::Test
   def test_valid_parameters
