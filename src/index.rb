@@ -22,18 +22,20 @@ options '*' do
 end
 
 get '/' do
-    # grab the engagement score and cut-off score from the parameters
     engagement_score_param = params['engagement_score']
     cut_off_score_param = params['cut_off_score']
-
-    # call the function that runs validation checks. It returns the scores now converted to ints
-    engagement_score, cut_off_score = validate_parameters(engagement_score_param, cut_off_score_param)
-
-    # ternary conditional operator
-    risk = engagement_score < cut_off_score ? "at risk" : "not at risk"
-
-    # respond with the risk status, engagement score, and cut-off score as JSON
-    content_type :json
-    { :risk => risk, :engagement_score => engagement_score, :cut_off_score => cut_off_score }.to_json
-
-end
+  
+    validation_result = validate_parameters(engagement_score_param, cut_off_score_param)
+  
+    # The function should return a hash if there's an error, and there should be an error message
+    if validation_result.is_a?(Hash) && validation_result[:error]
+        content_type :json
+        status validation_result[:status] # Use the status code returned by validate_parameters
+        return { error: validation_result[:error] }.to_json
+    else
+        engagement_score, cut_off_score = validation_result
+        risk = engagement_score < cut_off_score ? "at risk" : "not at risk"
+        content_type :json
+        { risk: risk, engagement_score: engagement_score, cut_off_score: cut_off_score }.to_json
+    end
+  end

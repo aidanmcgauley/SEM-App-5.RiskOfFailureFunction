@@ -14,31 +14,37 @@ class TestValidateParameters < Minitest::Test
     # because an error message will be returned isntead
     result = validate_parameters('abc', '40')
     assert_equal "Invalid parameter. The calculated engagement score for your attendance was not an integer.", result[:error]
+    assert_equal 400, result[:status]
   end
 
   def test_invalid_cut_off_score
     result = validate_parameters('50', 'abc')
     assert_equal "Invalid input. Cut-off Engagement Score must be an integer.", result[:error]
+    assert_equal 400, result[:status]
   end
 
   def test_engagement_score_out_of_range_low
     result = validate_parameters('-5', '50')
     assert_equal "Invalid parameter. The calculated engagement score for your attendance must be between 0 and 100.", result[:error]
+    assert_equal 400, result[:status]
   end
   
   def test_engagement_score_out_of_range_high
     result = validate_parameters('105', '50')
     assert_equal "Invalid parameter. The calculated engagement score for your attendance must be between 0 and 100.", result[:error]
+    assert_equal 400, result[:status]
   end
 
   def test_cut_off_score_out_of_range_low
     result = validate_parameters('50', '-10')
     assert_equal "Invalid input. Cut-off score must be between 0 and 100.", result[:error]
+    assert_equal 400, result[:status]
   end
   
   def test_cut_off_score_out_of_range_high
     result = validate_parameters('50', '110')
     assert_equal "Invalid input. Cut-off score must be between 0 and 100.", result[:error]
+    assert_equal 400, result[:status]
   end
   
 end
