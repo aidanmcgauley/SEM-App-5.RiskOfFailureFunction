@@ -10,7 +10,7 @@ configure do
 end
   
 before do
-    response.headers['Access-Control-Allow-Origin'] = 'http://sem-frontend.40058902.qpc.hal.davecutting.uk/'
+    response.headers['Access-Control-Allow-Origin'] = 'http://sem-frontend.40058902.qpc.hal.davecutting.uk'
 end
 
 # I was having CORS issues, so needed to include some headers to connect frontend and backend
