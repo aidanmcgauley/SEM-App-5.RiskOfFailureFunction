@@ -3,7 +3,7 @@ require 'json'
 require 'sinatra/cross_origin'
 require_relative 'functions'
 
-set :port, 8005
+set :port, 80
 
 configure do
     enable :cross_origin

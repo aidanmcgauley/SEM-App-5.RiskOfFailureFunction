@@ -14,7 +14,7 @@ RUN bundle install
 COPY . .
 
 # Expose the port that Sinatra will run on
-EXPOSE 8005
+EXPOSE 80
 
 # Define the command to run your application using Rack
-CMD ["bundle", "exec", "rackup", "--host", "0.0.0.0", "-p", "8005"]
+CMD ["bundle", "exec", "rackup", "--host", "0.0.0.0", "-p", "80"]
